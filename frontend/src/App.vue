@@ -1,10 +1,3 @@
-<template>
-<div class= "app">
-  <h1>pokename</h1>
-</div>
-</template>
-
-
 <script lang = "ts">
 import { defineComponent } from 'vue';
 
@@ -12,44 +5,38 @@ export default defineComponent({
   name: 'app',
   components: {},
   data(){
-
+    return {
+      getResult: String
+    }
+  },
+  methods: {
+    formatResponse(res){
+      return JSON.stringify(res, null, 2);
+    }
+    async getPokemon(){
+      try{
+        const res = await fetch(`http://localhost:3002/api`);
+        if (!res.ok) {
+          const message = `u fucked up`
+          throw new Error(message);
+        }
+        const data = await res.json();
+        this.getResult = data;
+      }
+      
+    }
   }
 })
-
-interface Pokemon {
-  id: number;
-  name: String;
-  sprites: PokemonSprites;
-}
-
-interface PokemonSprites {
-  back_default: string;
-  front_default: string;
-}
-const getPokemon = async (id : number) => {
-  const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-  const res = await fetch(url);
-  const formattedPokemon : Pokemon = await res.json();
-  createPokemonCard(formattedPokemon);
-  } 
-
-const fillPokeList = async () =>{
-  for (let i = 1; i < 150; i++){
-    await getPokemon(i);
-  }
-}
-
-const createPokemonCard = (formattedPokemon : Pokemon) => {
-  const pokeElement = document.createElement('div');
-  pokeElement.classList.add('pokemon-card');
-  let pokeInnerName = `${formattedPokemon.name}`;
-  pokeElement.innerHTML += pokeInnerName
-  pokeElement.innerHTML += '<img src="'+ formattedPokemon.sprites.front_default+'"/>';
-  document.body.append(pokeElement)
-}
-
-fillPokeList();
 </script>
+
+<template>
+<div class= "app">
+  <h1>pokename</h1>
+    <div>
+    {{$data}}
+    </div>
+</div>
+</template>
 
 <style>
 #app {
