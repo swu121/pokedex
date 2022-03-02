@@ -1,18 +1,14 @@
 <script lang = "ts">
-import { defineComponent } from 'vue';
-
+import { defineComponent, ref } from 'vue';
 export default defineComponent({
   name: 'app',
   components: {},
-  data(){
-    return {
-      getResult: String
-    }
+  setup(){
+    const name = ref('Bulb')
+    const urlol = ref('https://m.media-amazon.com/images/I/81iB6EGUDLL._AC_UY445_.jpg')
+    return { name, urlol}
   },
   methods: {
-    formatResponse(res){
-      return JSON.stringify(res, null, 2);
-    }
     async getPokemon(){
       try{
         const res = await fetch(`http://localhost:3002/api`);
@@ -21,9 +17,11 @@ export default defineComponent({
           throw new Error(message);
         }
         const data = await res.json();
-        this.getResult = data;
+        console.log(data)
+        this.name = data.name;
+        this.urlol = data.url
       }
-      
+      catch(err){}
     }
   }
 })
@@ -33,8 +31,9 @@ export default defineComponent({
 <div class= "app">
   <h1>pokename</h1>
     <div>
-    {{$data}}
+    {{name}}
     </div>
+    <img v-bind:src = "urlol">
 </div>
 </template>
 

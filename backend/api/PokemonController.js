@@ -1,3 +1,5 @@
 export default class PokemonCtrl{
-    static async apiGetPokemons(req, res, next)
+    static async apiGetPokemons(req, res, next){
+        
+    }
 }
