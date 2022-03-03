@@ -18,7 +18,7 @@ app.use("*", (req, res) => res.status(404).json({ error: "not found"}))
 
 let KantoList = []
 const fetchPokemon = async() => {
-    for (let i = 1; i < 5; i++){
+    for (let i = 1; i < 152; i++){
         await getPokemon(i)
     }
 }

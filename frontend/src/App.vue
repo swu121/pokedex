@@ -1,13 +1,13 @@
 <script lang = "ts">
 import { defineComponent, ref } from 'vue';
+import Pokemon from './types/pokemon'
 export default defineComponent({
-  name: 'app',
+  name: 'getPokemon',
   components: {},
   data(){
     this.getPokemon()
-    const name = ref('Bulb')
-    const urlol = ref('https://m.media-amazon.com/images/I/81iB6EGUDLL._AC_UY445_.jpg')
-    return {name, urlol}
+    const pokearray = ref<Pokemon[]>([])
+    return {pokearray}
 
   },
   methods: {
@@ -15,10 +15,7 @@ export default defineComponent({
       try{
         let res = await fetch(`http://localhost:3002/api`);
         let data = await res.json();
-        console.log(data)
-        console.log(data[1].name)
-        this.name = data[1].name
-        this.urlol = data[1].sprite
+        this.pokearray = data
       }
       catch(error){
         console.log(error)
@@ -30,11 +27,17 @@ export default defineComponent({
 
 <template>
 <div class= "app">
-  <h1>pokename</h1>
-    <div>
-    {{name}}
+  <h1>pokedex</h1>
+  <div class = "row row-cols-1 row-cols-md-4 g-4">
+    <div v-for="pokemon in pokearray" v-bind:key="pokemon.id" class="col">
+      <div class="card">
+        <img v-bind:src = "pokemon.sprite" class="card-img-top" alt="....">
+          <div class = "pokecardbody">
+            <h5 class="card-title">{{pokemon.name}}</h5>
+          </div>
+      </div>
     </div>
-    <img v-bind:src = "urlol">
+  </div>
 </div>
 </template>
 
@@ -44,7 +47,9 @@ export default defineComponent({
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #000000;
+  background-color: grey;
 }
+
+
 </style>
