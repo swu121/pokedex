@@ -3,26 +3,27 @@ import { defineComponent, ref } from 'vue';
 export default defineComponent({
   name: 'app',
   components: {},
-  setup(){
+  data(){
+    this.getPokemon()
     const name = ref('Bulb')
     const urlol = ref('https://m.media-amazon.com/images/I/81iB6EGUDLL._AC_UY445_.jpg')
-    return { name, urlol}
+    return {name, urlol}
+
   },
   methods: {
-    async getPokemon(){
+    async getPokemon(){ 
       try{
-        const res = await fetch(`http://localhost:3002/api`);
-        if (!res.ok) {
-          const message = `u fucked up`
-          throw new Error(message);
-        }
-        const data = await res.json();
+        let res = await fetch(`http://localhost:3002/api`);
+        let data = await res.json();
         console.log(data)
-        this.name = data.name;
-        this.urlol = data.url
+        console.log(data[1].name)
+        this.name = data[1].name
+        this.urlol = data[1].sprite
       }
-      catch(err){}
-    }
+      catch(error){
+        console.log(error)
+      }
+    },
   }
 })
 </script>
