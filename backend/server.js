@@ -13,23 +13,23 @@ app.listen(PORT, () => {
     console.log(`Server is running on ${url}`)
 })
 
-app.use("/api", (req, res) => res.json(KantoList))
+app.use("/api", async (req, res) => {
+    let KantoList = []
+    for (let i = 1; i < 152; i++){
+        await getPokemon(i, KantoList)
+    }
+    res.json(KantoList)})
 app.use("*", (req, res) => res.status(404).json({ error: "not found"}))
 
-let KantoList = []
-const fetchPokemon = async() => {
-    for (let i = 1; i < 152; i++){
-        await getPokemon(i)
-    }
-}
-const getPokemon = async x => {
+
+const getPokemon = async (x, KantoList) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${x}`
     const res = await fetch(url);
     const jsonres = await res.json();
     let KantoDict= {}
     KantoDict["id"] = x
     KantoDict["name"] = jsonres.name
-    KantoDict["sprite"] = jsonres.sprites.front_default
+    KantoDict["sprite"] = `https://img.pokemondb.net/sprites/x-y/normal/${jsonres.name}.png`
     if (jsonres.types.length > 1) {
         KantoDict["types"] = [jsonres.types[0].type.name, jsonres.types[1].type.name]
     }
@@ -43,15 +43,3 @@ const getPokemon = async x => {
         jsonres.stats[4].base_stat, jsonres.stats[5].base_stat]
     KantoList.push(KantoDict)
 }
-
-const log = lister => {
-    console.log(lister)
-}
-export default class PokemonCtrl{
-    static async apiGetPokemons(req, res, next){
-        res.KantoDict       
-    }
-}
-
-fetchPokemon()
-console.log(KantoList)

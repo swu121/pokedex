@@ -16,6 +16,7 @@ export default defineComponent({
         let res = await fetch(`http://localhost:3002/api`);
         let data = await res.json();
         this.pokearray = data
+        console.log(data)
       }
       catch(error){
         console.log(error)
