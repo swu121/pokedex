@@ -13,14 +13,18 @@ app.listen(PORT, () => {
     console.log(`Server is running on ${url}`)
 })
 
+let x  = 1;
 app.use("/api", async (req, res) => {
     let KantoList = []
-    for (let i = 1; i < 152; i++){
-        await getPokemon(i, KantoList)
+    let limit = x + 20;
+    console.log(limit)
+    for (; x < limit; x++){
+        console.log(x)
+        await getPokemon(x, KantoList)
     }
     res.json(KantoList)})
 app.use("*", (req, res) => res.status(404).json({ error: "not found"}))
-
+ 
 
 const getPokemon = async (x, KantoList) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${x}`
@@ -29,7 +33,7 @@ const getPokemon = async (x, KantoList) => {
     let KantoDict= {}
     KantoDict["id"] = x
     KantoDict["name"] = jsonres.name
-    KantoDict["sprite"] = `https://img.pokemondb.net/sprites/x-y/normal/${jsonres.name}.png`
+    KantoDict["sprite"] = jsonres['sprites']['other']["official-artwork"]['front_default']
     if (jsonres.types.length > 1) {
         KantoDict["types"] = [jsonres.types[0].type.name, jsonres.types[1].type.name]
     }
@@ -41,5 +45,6 @@ const getPokemon = async (x, KantoList) => {
     KantoDict["stats"] = [jsonres.stats[0].base_stat, jsonres.stats[1].base_stat,
         jsonres.stats[2].base_stat, jsonres.stats[3].base_stat,
         jsonres.stats[4].base_stat, jsonres.stats[5].base_stat]
+    KantoDict["flipped"] = false
     KantoList.push(KantoDict)
 }

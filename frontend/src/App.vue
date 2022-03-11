@@ -1,27 +1,60 @@
 <script lang = "ts">
 import { defineComponent, ref } from 'vue';
 import Pokemon from './types/pokemon'
+import axios from "axios"
+import { createDOMCompilerError } from '@vue/compiler-dom';
+import Card from './components/card.vue';
+
+
 export default defineComponent({
-  name: 'getPokemon',
-  components: {},
+  name: 'Pokedex',
+  components: { Card },
   data(){
-    this.getPokemon()
+    // let isScrolled = false;
+    let x : number = 0;
     const pokearray = ref<Pokemon[]>([])
+    // let x : number = 0;
+    // const infiniteScroll = () => {
+    //   if (window.scrollY > (document.body.offsetHeight - 100) && !isScrolled){
+    //     isScrolled = true;
+    //     x++
+    //   this.getPokemon(x)
+    this.getPokemon(x)
+    console.log(pokearray)
     return {pokearray}
 
   },
   methods: {
     async getPokemon(){ 
       try{
-        let res = await fetch(`http://localhost:3002/api`);
+        let res = await fetch(`http://localhost:3002/api`)
         let data = await res.json();
-        this.pokearray = data
-        console.log(data)
+        for (let x :number =0; x<data.length; x++){
+          this.pokearray.push(data[x])
+        }
       }
       catch(error){
         console.log(error)
       }
     },
+    getNextPokemon(){
+      console.log('Im getting more shit')
+      window.onscroll = () => {
+        let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+        if (bottomOfWindow){
+          this.getPokemon()
+        }
+      }
+    },
+    toggle: function(card:Pokemon){
+      card.flipped = !card.flipped;
+    }
+  },
+  beforeMount(){
+    this.getPokemon()
+  },
+  mounted(){
+    this.getNextPokemon();
   }
 })
 </script>
@@ -29,13 +62,16 @@ export default defineComponent({
 <template>
 <div class= "app">
   <h1>pokedex</h1>
-  <div class = "row row-cols-1 row-cols-md-4 g-4">
-    <div v-for="pokemon in pokearray" v-bind:key="pokemon.id" class="col">
-      <div class="card">
-        <img v-bind:src = "pokemon.sprite" class="card-img-top" alt="....">
-          <div class = "pokecardbody">
-            <h5 class="card-title">{{pokemon.name}}</h5>
-          </div>
+  <div class = "pokedex">
+    <div v-for="pokemon in pokearray" class = "flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img class="card-img-top" v-bind:src = "pokemon.sprite">
+          {{pokemon.name}}
+        </div>
+        <div class="flip-card-back">
+          <p>backshots</p>
+        </div>
       </div>
     </div>
   </div>
@@ -52,5 +88,52 @@ export default defineComponent({
   background-color: grey;
 }
 
+.flip-card{
+  border-style: hidden;
+  background-color: transparent;
+  width: 250px;
+  height: 300px;
+  perspective: 1000px;
+}
 
+.flip-card-inner{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.flip-card-back {
+  background-color: #222e36ef;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.pokedex{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  align-items: center;
+  gap: 15px;
+}
 </style>

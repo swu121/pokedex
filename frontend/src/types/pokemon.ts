@@ -1,4 +1,5 @@
 type Pokemon = {
+    flipped: boolean,
     id: number,
     name: string,
     sprite: string,
