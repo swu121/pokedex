@@ -1,24 +1,13 @@
 <script lang = "ts">
 import { defineComponent, ref } from 'vue';
 import Pokemon from './types/pokemon'
-import axios from "axios"
-import { createDOMCompilerError } from '@vue/compiler-dom';
-import Card from './components/card.vue';
 
 
 export default defineComponent({
   name: 'Pokedex',
-  components: { Card },
   data(){
-    // let isScrolled = false;
     let x : number = 0;
     const pokearray = ref<Pokemon[]>([])
-    // let x : number = 0;
-    // const infiniteScroll = () => {
-    //   if (window.scrollY > (document.body.offsetHeight - 100) && !isScrolled){
-    //     isScrolled = true;
-    //     x++
-    //   this.getPokemon(x)
     this.getPokemon(x)
     console.log(pokearray)
     return {pokearray}
@@ -119,7 +108,7 @@ export default defineComponent({
 }
 
 .flip-card-front {
-  background-color: #bbb;
+  background-color: white;
   color: black;
 }
 
