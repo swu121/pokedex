@@ -55,11 +55,17 @@ export default defineComponent({
     <div v-for="pokemon in pokearray" class = "flip-card">
       <div class="flip-card-inner">
         <div class="flip-card-front">
+          <div style="text-align: right;">#{{pokemon.id}}</div>
           <img class="card-img-top" v-bind:src = "pokemon.sprite">
-          {{pokemon.name}}
+          <div class = "card-body">
+            <h5 class="card-title">{{pokemon.name}}</h5>
+            <p class="card-text">Type(s): {{pokemon.types[0]}} {{pokemon.types[1]}}<br>Height: {{pokemon.height/10}} m <br>Weight: {{pokemon.weight/10}} kgs</p>
+          </div>
         </div>
         <div class="flip-card-back">
-          <p>backshots</p>
+          <div>
+          stats
+          </div>
         </div>
       </div>
     </div>
@@ -73,15 +79,15 @@ export default defineComponent({
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #000000;
-  background-color: grey;
+  color: white;
+  background-color: black;
 }
 
 .flip-card{
   border-style: hidden;
   background-color: transparent;
   width: 250px;
-  height: 300px;
+  height: 400px;
   perspective: 1000px;
 }
 
@@ -108,21 +114,27 @@ export default defineComponent({
 }
 
 .flip-card-front {
-  background-color: white;
-  color: black;
+  background-color: #222e36ef;
+  color: white;
 }
 
 .flip-card-back {
   background-color: #222e36ef;
   color: white;
   transform: rotateY(180deg);
+  display:grid;
+  place-items: center;
 }
 
 .pokedex{
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   justify-items: center;
   align-items: center;
-  gap: 15px;
+  gap: 5px;
+}
+
+.card-body{
+  padding: 0px;
 }
 </style>

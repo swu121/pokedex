@@ -32,7 +32,7 @@ const getPokemon = async (x, KantoList) => {
     const jsonres = await res.json();
     let KantoDict= {}
     KantoDict["id"] = x
-    KantoDict["name"] = jsonres.name
+    KantoDict["name"] = jsonres.name.charAt(0).toUpperCase() + jsonres.name.slice(1)
     KantoDict["sprite"] = jsonres['sprites']['other']["official-artwork"]['front_default']
     if (jsonres.types.length > 1) {
         KantoDict["types"] = [jsonres.types[0].type.name, jsonres.types[1].type.name]
