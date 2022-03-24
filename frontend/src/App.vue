@@ -87,7 +87,7 @@ export default defineComponent({
   border-style: hidden;
   background-color: transparent;
   width: 250px;
-  height: 400px;
+  height: 420px;
   perspective: 1000px;
 }
 
