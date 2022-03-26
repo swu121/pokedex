@@ -68,8 +68,8 @@ app.post('/users', async (req, res) => {
 })
 
 app.post('/users/login', async (req, res) => {
-    const user = users.find(user => user.name = req.body.name);
-    if (user == null) {
+    const user2 = await UsersDAO.findUser(req.body.name)
+    if (user2 == null) {
         return res.status(400).send('Cannot find user')
     }
     try {

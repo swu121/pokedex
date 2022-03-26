@@ -1,5 +1,3 @@
-import mongodb from "mongodb"
-
 let pokedex
 
 export default class UsersDAO { 
@@ -13,7 +11,7 @@ export default class UsersDAO {
             pokedex = await conn.db(process.env.POKEDEX_NS).collection("users")
         } catch (e){
             console.error(
-                `Unable to establish a connection handle in restaurantsDAO: ${e}`,
+                `Unable to establish a connection handle in restaurantsDAO: ${e}`
             )
         }
     }
@@ -29,6 +27,23 @@ export default class UsersDAO {
         catch (e){
             console.error(`Unable to post user: ${e}`)
             return { error: e}
+        }
+    }
+
+    static async findUser(username, password){
+        try{
+            pokedex.findOne({}, function(err, result){
+                if (err) throw err;
+                console.log(result.name);
+            })
+            if (result){
+                console.log(`Found a user with the name ${username}`)
+                console.log(result)
+            }
+            return result;
+        }
+        catch (e){
+            console.error(`Unable to establish a connection handle in pokeDAO: ${e}`)
         }
     }
 }
