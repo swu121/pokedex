@@ -40,7 +40,7 @@ MongoClient.connect(
 
 app.use("/api", async (req, res) => {
     let KantoList = []
-    let limit = x + 20;
+    let limit = x + 24;
     for (; x < limit; x++){
         console.log(x)
         await getPokemon(x, KantoList)

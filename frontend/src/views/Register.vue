@@ -51,6 +51,7 @@
 <script lang="ts">
 import firebase from 'firebase/compat/app'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import router from '../router/index'
 import { defineComponent, ref } from 'vue';
 // @ts-ignore
 import { auth } from '../firebase'
@@ -78,6 +79,7 @@ export default defineComponent ({
                 const errorMessage = error.message;
                 alert(errorMessage)
             });
+            router.push('/')
         }
     }
 })

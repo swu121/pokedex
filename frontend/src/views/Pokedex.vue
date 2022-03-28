@@ -1,6 +1,8 @@
 <script lang = "ts">
 import { defineComponent, ref } from 'vue';
 import Pokemon from '../types/pokemon'
+import NavBar from '../components/navbar.vue'
+import Navbar from '../components/navbar.vue'
 
 
 export default defineComponent({
@@ -13,6 +15,10 @@ export default defineComponent({
     return {pokearray}
 
   },
+  components: {
+    NavBar,
+    Navbar
+},
   methods: {
     async getPokemon(){ 
       try{
@@ -49,7 +55,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <h1>pokedex</h1>
+  <Navbar></Navbar>
   <div class = "pokedex">
     <div v-for="pokemon in pokearray" class = "flip-card">
       <div class="flip-card-inner">
@@ -85,7 +91,7 @@ export default defineComponent({
   border-style: hidden;
   background-color: transparent;
   width: 250px;
-  height: 420px;
+  height: 400px;
   perspective: 1000px;
 }
 
@@ -126,13 +132,12 @@ export default defineComponent({
 
 .pokedex{
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   justify-items: center;
-  align-items: center;
   gap: 5px;
 }
 
-.card-body{
-  padding: 0px;
+.flip-card{
+  margin-bottom: 20px;
 }
 </style>
