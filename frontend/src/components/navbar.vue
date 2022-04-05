@@ -1,12 +1,32 @@
 <script lang = "ts">
 
 import { defineComponent, ref } from 'vue';
+import { auth } from '../firebase'
 
-export default defineComponent ({
-    name: 'NavBar'
+export default defineComponent({
+    name: 'navbar',
+    data(){
+        const user : any = null
+        const userStatus = ref(false);
+        return userStatus.value, user
+    },
 
+    methods:{
+        Logout(){
+            auth.signOut()
+            .then(() => console.log("Signed Out"))
+            .catch(err => alert(err.message))
+        }
+    },
+    
+    beforeMount(){
+        this.user = auth.currentUser;
+        if (this.user){
+            this.userStatus = true
+        }
+
+    }
 })
-
 
 
 
@@ -27,13 +47,14 @@ export default defineComponent ({
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-             <router-link to="/register" class = "nav-link">Register</router-link>
+             <router-link to="/login" class = "nav-link">Login</router-link>
         </li>
+        <li class="nav-item" v-if="userStatus">
+            <a class="nav-link" href="#" value = 'Logout'>Logout</a>
+        </li>
+
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+
     </div>
     </nav>
 </template>
