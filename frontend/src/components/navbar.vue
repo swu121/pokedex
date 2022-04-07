@@ -2,13 +2,17 @@
 
 import { defineComponent, ref } from 'vue';
 import { auth } from '../firebase'
+import router from '../router';
 
 export default defineComponent({
     name: 'navbar',
     data(){
-        const user : any = null
-        const userStatus = ref(false);
-        return userStatus.value, user
+        let user : any = null
+        let userStatus = ref(false);
+        return {
+            userStatus,
+            user
+        }
     },
 
     methods:{
@@ -16,19 +20,16 @@ export default defineComponent({
             auth.signOut()
             .then(() => console.log("Signed Out"))
             .catch(err => alert(err.message))
+            router.push('/')
         }
     },
     
-    beforeMount(){
-        this.user = auth.currentUser;
-        if (this.user){
-            this.userStatus = true
+    BeforeMount(){
+        auth.onAuthStateChanged => {
+            console.log('hi')
         }
-
     }
 })
-
-
 
 </script>
 
@@ -40,17 +41,16 @@ export default defineComponent({
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="userStatus === false">
              <router-link to="/login" class = "nav-link">Login</router-link>
         </li>
-        <li class="nav-item" v-if="userStatus">
-            <a class="nav-link" href="#" value = 'Logout'>Logout</a>
+        <li class="nav-item" v-if="userStatus === true">
+            <a class="nav-link" href="#" @click = "Logout">Logout</a>
         </li>
 
         </ul>

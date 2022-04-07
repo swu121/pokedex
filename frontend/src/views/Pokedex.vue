@@ -1,7 +1,6 @@
 <script lang = "ts">
 import { defineComponent, ref } from 'vue';
 import Pokemon from '../types/pokemon'
-import NavBar from '../components/navbar.vue'
 import Navbar from '../components/navbar.vue'
 
 
@@ -16,7 +15,6 @@ export default defineComponent({
 
   },
   components: {
-    NavBar,
     Navbar
 },
   methods: {

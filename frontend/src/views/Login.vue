@@ -30,7 +30,7 @@
                     </div>
 
                     <div class="pt-1 mb-4">
-                        <button class="btn btn-dark btn-lg btn-block" type="button" value = 'Login'>Login</button>
+                        <button class="btn btn-dark btn-lg btn-block" type="button" @click="Login">Login</button>
                     </div>
 
                     <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <router-link to="/register">Register Here</router-link></p>
@@ -49,11 +49,11 @@
 </template>
 
 <script lang="ts">
-import firebase from 'firebase/compat/app'
 import { defineComponent, ref } from 'vue';
-import { getAuth, signInWithEmailAndPassword} from "firebase/auth"
-// @ts-ignore
-import { auth } from '../firebase'
+import { getAuth, signInWithEmailAndPassword, signOut} from "firebase/auth"
+import {auth} from "../firebase"
+import router from '../router/index'
+
 
 export default defineComponent ({
     name: 'Login',
@@ -78,7 +78,9 @@ export default defineComponent ({
                 const errorMessage = error.message;
                 alert(errorMessage)
             });
-        }
+            console.log("logged in")
+            router.push('/');
+        },
     }
 })
 </script>

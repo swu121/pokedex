@@ -16,7 +16,7 @@
                 <div class="col-md-6 col-lg-7 d-flex align-items-center">
                 <div class="card-body p-4 p-lg-5 text-black">
 
-                    <form>
+                    <form @submit.prevent = "Register">
                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Register your account</h5>
 
                     <div class="form-outline mb-4">
@@ -30,7 +30,7 @@
                     </div>
 
                     <div class="pt-1 mb-4">
-                        <button class="btn btn-dark btn-lg btn-block" type="button" value = 'Register'>Register</button>
+                        <button class="btn btn-dark btn-lg btn-block" type="button" @click ="Register" >Register</button>
                     </div>
                     
                     <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <router-link to="/login">Login Here</router-link></p>
@@ -49,13 +49,10 @@
 </template>
 
 <script lang="ts">
-import firebase from 'firebase/compat/app'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import router from '../router/index'
 import { defineComponent, ref } from 'vue';
-// @ts-ignore
-import { auth } from '../firebase'
-
+import {auth} from "../firebase"
 export default defineComponent ({
     name: 'Register',
     data(){
@@ -70,7 +67,8 @@ export default defineComponent ({
     },
 
     methods:{
-        Register(){
+        Register() {
+            console.log(this.email, this.password)
             createUserWithEmailAndPassword(this.author, this.email, this.password)
             .then((userCredential) => {
                 const user = userCredential.user;
