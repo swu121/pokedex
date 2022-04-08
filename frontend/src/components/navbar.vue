@@ -1,5 +1,6 @@
 <script lang = "ts">
 
+import { onAuthStateChanged } from '@firebase/auth';
 import { defineComponent, ref } from 'vue';
 import { auth } from '../firebase'
 import router from '../router';
@@ -24,11 +25,17 @@ export default defineComponent({
         }
     },
     
-    BeforeMount(){
-        auth.onAuthStateChanged => {
-            console.log('hi')
+    created(){
+        onAuthStateChanged(auth, user => {
+            if (user){
+                this.userStatus = true
+            }
+            else{
+                this.userStatus = false
+            }
+        })
         }
-    }
+
 })
 
 </script>

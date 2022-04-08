@@ -52,7 +52,10 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import router from '../router/index'
 import { defineComponent, ref } from 'vue';
-import {auth} from "../firebase"
+import {auth, db} from "../firebase"
+import {collection, addDoc} from "firebase/firestore"
+
+
 export default defineComponent ({
     name: 'Register',
     data(){
@@ -72,12 +75,25 @@ export default defineComponent ({
             createUserWithEmailAndPassword(this.author, this.email, this.password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                this.addUser()
+                router.push('/')
             })
             .catch((error) => {
                 const errorMessage = error.message;
                 alert(errorMessage)
             });
-            router.push('/')
+        },
+        async addUser() {
+            try{
+                const docRef = await addDoc(collection(db, "team"), {
+                    username: this.email,
+                    poketeam: []
+                });
+                console.log("Document written with ID: ", docRef.id);
+                }
+                catch(e){
+                    console.error("Error adding document: ", e);
+            }
         }
     }
 })
