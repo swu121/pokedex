@@ -73,6 +73,7 @@ export default defineComponent ({
             signInWithEmailAndPassword(this.author, this.email, this.password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                console.log(user)
             })
             .catch((error) => {
                 const errorMessage = error.message;

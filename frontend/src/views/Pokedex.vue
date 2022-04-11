@@ -39,9 +39,6 @@ export default defineComponent({
         }
       }
     },
-    toggle: function(card:Pokemon){
-      card.flipped = !card.flipped;
-    }
   },
   beforeMount(){
     this.getPokemon()
@@ -67,7 +64,7 @@ export default defineComponent({
         </div>
         <div class="flip-card-back">
           <div>
-          stats
+            <button type="button" class="btn btn-primary">Add to Team</button>
           </div>
         </div>
       </div>
@@ -137,5 +134,28 @@ export default defineComponent({
 
 .flip-card{
   margin-bottom: 20px;
+}
+
+.btn {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.btn-primary {
+  font-family: Raleway-SemiBold;
+  font-size: 13px;
+  color: rgba(58, 133, 191, 0.75);
+  letter-spacing: 1px;
+  line-height: 15px;
+  border: 2px solid rgba(58, 133, 191, 0.75);
+  border-radius: 40px;
+  background: transparent;
+  transition: all 0.3s ease 0s;
+}
+
+.btn-primary:hover {
+  color: #FFF;
+  background: rgba(58, 133, 191, 0.75);
+  border: 2px solid rgba(58, 133, 191, 0.75);
 }
 </style>
