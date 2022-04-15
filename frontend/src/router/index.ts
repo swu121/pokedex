@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Pokedex from '../views/Pokedex.vue'
 import Login from '../views/Login.vue'
+import myTeam from "../views/Team.vue"
+
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -17,6 +19,11 @@ const routes: Array<RouteRecordRaw> = [
         path: '/register', 
         name: 'Register',
         component: () => import('../views/Register.vue')
+    }, 
+    {
+        path: '/myteam',
+        name: 'Team',
+        component: myTeam
     }
 ]
 

@@ -50,7 +50,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { getAuth, signInWithEmailAndPassword, signOut} from "firebase/auth"
+import { signInWithEmailAndPassword } from "firebase/auth"
 import {auth} from "../firebase"
 import router from '../router/index'
 

@@ -2,6 +2,10 @@
 import { defineComponent, ref } from 'vue';
 import Pokemon from '../types/pokemon'
 import Navbar from '../components/navbar.vue'
+import { doc, updateDoc, collection, arrayUnion} from "firebase/firestore"
+import { db, auth } from "../firebase/index"
+import { onAuthStateChanged } from '@firebase/auth';
+import router from '../router';
 
 
 export default defineComponent({
@@ -39,6 +43,20 @@ export default defineComponent({
         }
       }
     },
+    async addTeam(pokeid: number){
+      onAuthStateChanged(auth, async (user) => {
+        if (user){
+          console.log(user.email)
+          let email:string = user.email!
+          await updateDoc(doc(db, "team", email), {
+            poketeam: arrayUnion(pokeid)
+          });
+        }
+        else{
+          router.push('/login')
+        }
+      })
+    }
   },
   beforeMount(){
     this.getPokemon()
@@ -64,7 +82,7 @@ export default defineComponent({
         </div>
         <div class="flip-card-back">
           <div>
-            <button type="button" class="btn btn-primary">Add to Team</button>
+            <button type="button" class="btn btn-primary" @click="addTeam(pokemon.id)">Add to Team</button>
           </div>
         </div>
       </div>
