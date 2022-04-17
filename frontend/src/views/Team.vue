@@ -2,34 +2,53 @@
 import { defineComponent, ref } from 'vue';
 import Pokemon from '../types/pokemon'
 import Navbar from '../components/navbar.vue'
-
+import { onAuthStateChanged } from '@firebase/auth';
+import { db, auth } from "../firebase/index"
+import router from '../router';
 
 export default defineComponent({
   name: 'myTeam',
   data(){
-    let x : number = 0;
     const pokearray = ref<Pokemon[]>([])
-    this.getPokemon(x)
     console.log(pokearray)
     return {pokearray}
 
   },
   components: {
     Navbar
-},
+  },
   methods: {
-    async getPokemon(){ 
-      try{
-        let res = await fetch(`http://localhost:3002/api`)
-        let data = await res.json();
-        for (let x :number =0; x<data.length; x++){
-          this.pokearray.push(data[x])
+    async getPokemon(){
+      onAuthStateChanged(auth, async (user) => {
+        if (user){
+          let email:string = user.email!
+          const settings = {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              userid: email,
+              tester: 'test'
+            })
+          }; 
+          try{
+            let res = await fetch(`http://localhost:3002/teamapi`, settings);
+            let data = await res.json();
+            for (let x :number =0; x<data.length; x++){
+               this.pokearray.push(data[x])
+            }
+          }
+          catch(error){
+            console.log(error)
+          }
         }
-      }
-      catch(error){
-        console.log(error)
-      }
-    },
+        else{
+          router.push('/login')
+        }
+      })
+    }  
   },
   beforeMount(){
     this.getPokemon()

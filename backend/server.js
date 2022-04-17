@@ -6,17 +6,32 @@ import mongodb from "mongodb"
 import dotenv from "dotenv"
 import UsersDAO from "./dao/usersDAO.js"
 
+import {initializeApp} from "firebase/app";
+import {getAuth, getMultiFactorResolver} from "firebase/auth"
+import {getFirestore, doc, getDoc} from "firebase/firestore"
 
 const PORT = process.env.PORT || 3002;
 const users = [];
 let x  = 1;
 const app = express();
 const MongoClient = mongodb.MongoClient
+const firebaseConfig = {
+    apiKey: "AIzaSyBV5v7TZokHjIzlJjSNreNbaqlsAGl1Dns",
+    authDomain: "pokedex-a5642.firebaseapp.com",
+    projectId: "pokedex-a5642",
+    storageBucket: "pokedex-a5642.appspot.com",
+    messagingSenderId: "21220076380",
+    appId: "1:21220076380:web:03410ab538f0867dfe6f99",
+    measurementId: "G-XVRXYBYD7V"
+  };
+
+const fbapp = initializeApp(firebaseConfig)
+const db = getFirestore(fbapp)
+
 
 app.use(cors());
 app.use(express.json());
 dotenv.config()
-
 
 MongoClient.connect(
     process.env.POKEDEX_DB_URI,
@@ -37,6 +52,35 @@ MongoClient.connect(
         })
     })
 
+app.post("/teamapi", async( req, res) => {
+    // authenticate user with jwot token 
+    //let teamList = []
+    // const docRef = doc(db, "teams", req.body.email)
+    // const docSnap = await getDoc(docRef)
+
+    // if (docSnap.exists()) {
+    //     console.log("Document data:", docSnap.data())
+    // }
+    // //for numbers in pokedb.array: 
+    let KantoList = []
+    let email = JSON.stringify(req.body.userid)
+    email = email.replace(/['"]+/g, '')
+    let teamRef = doc(db, "team", email);
+    const docSnap = await (getDoc(teamRef))
+    if (docSnap.exists()){
+        let teamarray = docSnap.get('poketeam')
+        for (var i = 0; i < teamarray.length; i++){
+            console.log(teamarray[i])
+            await getPokemon(teamarray[i], KantoList)
+        }
+    }
+    else{
+        console.log("That document doesn't exist")
+    }
+
+    res.json(KantoList)
+})
+
 
 app.use("/api", async (req, res) => {
     let KantoList = []
@@ -47,43 +91,6 @@ app.use("/api", async (req, res) => {
     }
     res.json(KantoList)})
  
-app.get('/users', (req, res) =>{
-    res.json(users);
-})
-
-
-app.post('/users', async (req, res) => {
-    try {
-        const hashedPassword = await bycrypt.hash(req.body.password, 10)
-        const user = {name: req.body.name, password: hashedPassword}
-        users.push(user)
-        const userResponse = await UsersDAO.addUser(req.body.name, hashedPassword)
-        console.log(userResponse)
-
-        res.json({status: "we added a user"})
-    }
-    catch{
-        res.status(500).send()
-    }
-})
-
-app.post('/users/login', async (req, res) => {
-    const user2 = await UsersDAO.findUser(req.body.name)
-    if (user2 == null) {
-        return res.status(400).send('Cannot find user')
-    }
-    try {
-        if (await bycrypt.compare(req.body.password, user.password)){
-            res.send('Success')
-        }
-        else{
-            res.send('Incorrect')
-        }
-    }
-    catch{
-        res.status(500).send()
-    }
-})
 
 const getPokemon = async (x, KantoList) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${x}`

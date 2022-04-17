@@ -13,8 +13,6 @@ export default defineComponent({
   data(){
     let x : number = 0;
     const pokearray = ref<Pokemon[]>([])
-    this.getPokemon(x)
-    console.log(pokearray)
     return {pokearray}
 
   },

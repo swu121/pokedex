@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "pokedex-a5642",
+  "private_key_id": "529fc76b546d3ce7a0b5223fce1e3dbe301267f8",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC/Y/afWhpIeMWv\neHMe/fWrhemaqNMi8LeZG1aw7uEdGWbWXkb+E7BCziNiuGVqMewj4fSxDo3duN/U\nQqj32M7xkwiTl1XkHLxXxMRuiXr2xx7m+cfg2LUTwxWGRwxNOPz/dW1HCoe/+2/8\n7XmGfmkGosg4ImvIlrXWspjMLEw+W4w/TfklVEMiwjxJbHha/FvJT4nNUtQ8SBAo\ngrYshh8iwLm/cxCao3AarqQmMWveCE3XS3j1fCxx+rKXhACdW7KwLkcLAkBYKdmK\nx49itm15DidmMQIie6LW8CzzL4XIZpGHpMn7RATA1sUqtI8S2JXJ9HB0V7Uzl6iK\nECkT3+DtAgMBAAECggEALs24mjQL4OSt/VEAoBfda+5x1/lIts70qxvBKcAlK3tS\nh4JjLI+uh0vHYgUzgdKHC6hecS0cutfS3uLVVNT/mJqLGqLD5aa0VWdgXSLAQBim\nQThcrar5L0XCHgYCZ2EUF7nE+T5FP8jylEETurTvpKiKu5WJU7Ktcb1XufhsRcQr\nZhEOBWfVbzMD6BiRtjltlrTSV4Xc2DsocTZ8gxNvHMMCTW2tLJ96iEZU//No+cbf\nd4Gy8lfupPQaCAPzBPlHk00gZEod3fdEFnO4yWZ8dNcOWdJcjaF6z+Tt0YWR8d0K\nOjyG9bENXJYHrv7FmVNPgRScImPwvlvsNbIoOYoDiQKBgQDwqxOIjei7KamL6kjI\nqcUMUvtGHFyVyDcNUOrBmgo6GL58jpS3CurEaXWFjogVMWxzn7L/k0Mm64PRCOG3\nJvBiMg8KDi4gDd0xBpbcl1Nvtb/3frfREIZfHqouLQLPJYiK/sKTQtqv7X4wkS0o\nJwsPq4q0UQW+8Rq4RMH9kX+CVQKBgQDLlT5Kvk8xbd+/F9711I4DLwB4w9fSKTMX\nYsk3p7GAhiWy3wOEn+dj3D3KkocKhMICO3FIz+zefQQoOaLnxm7BgaUYaPzW7XTf\nydlL9eASiv7QEgPPV3cf1HA/yUVx0gAv3Ha+BtH2rDqphC9wiRTRxiij6x/6uC9C\nYzWg1YBsOQKBgCE8zz7NsnWexF6hZZno8GDKWQ+OvS6mbwv0v+cq+fyaDDyxiFJb\nPJ8RnXxrednLcJnrVVI8qUqHvjWxT1L3Gr3FAhS2bqJYp9KsgUtHzusfo7pvkr1Z\n1eTvHDuyVa/8FAZ2NrMVyZQAbawRcLYZ5kosu8Q5aFy9eZ43SL9XR8/dAoGAQZm/\nztnwLt9W3/7TK6focwIsRr3kx6Xa/sgoSrTQr7eKYk8WlR/psfYAO0xoE22gDpQU\n9v95NmBWfJfF9KWuftBF4M3D24X8yTgDu0RphdAgN+/2JlPq4OjVmthCdmDTCpkh\n8i3EbpYk+QbNOpgRi18tLVTQozvCjsPlPgROM5ECgYBhGV8FkrBARz2ce627nRjw\nOFinn3yz6tXtRQixX/kJ3QeH4eWsm9dYerxSLAta+uzdhrdYEbAoO1YDQdsUUoeZ\nq4+3oBd+UJFAylkwUv3RdCBxBF1aybN0ffZ5YZD6WXxEPA8UyjBi4tnL6aZSkErI\nJjtaQzL+qi2ifE5aH2ofqQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-6auic@pokedex-a5642.iam.gserviceaccount.com",
+  "client_id": "105218932579414719093",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-6auic%40pokedex-a5642.iam.gserviceaccount.com"
+}
