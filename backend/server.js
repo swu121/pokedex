@@ -112,5 +112,8 @@ const getPokemon = async (x, KantoList) => {
     KantoDict["stats"] = [jsonres.stats[0].base_stat, jsonres.stats[1].base_stat,
         jsonres.stats[2].base_stat, jsonres.stats[3].base_stat,
         jsonres.stats[4].base_stat, jsonres.stats[5].base_stat]
+    KantoDict["stats2"] = [(jsonres.stats[0].base_stat/120)*100,(jsonres.stats[1].base_stat/120)*100,
+        (jsonres.stats[2].base_stat/120)*100,(jsonres.stats[3].base_stat/120)*100,(jsonres.stats[4].base_stat/120)*100,
+        (jsonres.stats[5].base_stat/120)*100,]
     KantoList.push(KantoDict)
 }

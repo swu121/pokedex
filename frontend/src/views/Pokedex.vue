@@ -2,10 +2,11 @@
 import { defineComponent, ref } from 'vue';
 import Pokemon from '../types/pokemon'
 import Navbar from '../components/navbar.vue'
-import { doc, updateDoc, collection, arrayUnion} from "firebase/firestore"
+import { doc, updateDoc, arrayUnion} from "firebase/firestore"
 import { db, auth } from "../firebase/index"
 import { onAuthStateChanged } from '@firebase/auth';
 import router from '../router';
+import Pokecard from '../components/card.vue'
 
 
 export default defineComponent({
@@ -13,11 +14,13 @@ export default defineComponent({
   data(){
     let x : number = 0;
     const pokearray = ref<Pokemon[]>([])
+    console.log(pokearray)
     return {pokearray}
 
   },
   components: {
-    Navbar
+    Navbar,
+    Pokecard
 },
   methods: {
     async getPokemon(){ 
@@ -44,7 +47,6 @@ export default defineComponent({
     async addTeam(pokeid: number){
       onAuthStateChanged(auth, async (user) => {
         if (user){
-          console.log(user.email)
           let email:string = user.email!
           await updateDoc(doc(db, "team", email), {
             poketeam: arrayUnion(pokeid)
@@ -68,17 +70,17 @@ export default defineComponent({
 <template>
   <Navbar></Navbar>
   <div class = "pokedex">
-    <div v-for="pokemon in pokearray" class = "flip-card">
+    <div v-for="pokemon in pokearray" class = "flip-card" :key="pokemon.id">
       <div class="flip-card-inner">
-        <div class="flip-card-front">
+        <div class="flip-card-back">
           <div style="text-align: right;">#{{pokemon.id}}</div>
           <img class="card-img-top" v-bind:src = "pokemon.sprite">
           <div class = "card-body">
-            <h5 class="card-title">{{pokemon.name}}</h5>
+            <h5 class="card-title">pokemon.name</h5>
             <p class="card-text">Type(s): {{pokemon.types[0]}} {{pokemon.types[1]}}<br>Height: {{pokemon.height/10}} m <br>Weight: {{pokemon.weight/10}} kgs</p>
           </div>
         </div>
-        <div class="flip-card-back">
+        <div class="flip-card-front">
           <div>
             <button type="button" class="btn btn-primary" @click="addTeam(pokemon.id)">Add to Team</button>
           </div>
@@ -173,5 +175,16 @@ export default defineComponent({
   color: #FFF;
   background: rgba(58, 133, 191, 0.75);
   border: 2px solid rgba(58, 133, 191, 0.75);
+}
+
+.progress-bar{
+  animation-name: progress;
+  animation-duration: 3s;
+
+}
+@keyframes progress{
+  from{
+    width: 0;
+  }
 }
 </style>

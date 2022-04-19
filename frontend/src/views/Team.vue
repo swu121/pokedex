@@ -3,6 +3,7 @@ import { defineComponent, ref } from 'vue';
 import Pokemon from '../types/pokemon'
 import Navbar from '../components/navbar.vue'
 import { onAuthStateChanged } from '@firebase/auth';
+import { doc, updateDoc, arrayRemove} from "firebase/firestore"
 import { db, auth } from "../firebase/index"
 import router from '../router';
 
@@ -48,7 +49,20 @@ export default defineComponent({
           router.push('/login')
         }
       })
-    }  
+    },
+    async removeTeam(pokeid: number){
+      onAuthStateChanged(auth, async (user) => {
+        if (user){
+          let email:string = user.email!
+          await updateDoc(doc(db, "team", email), {
+            poketeam: arrayRemove(pokeid)
+          });
+        }
+        else{
+          router.push('/login')
+        }
+      })
+    }
   },
   beforeMount(){
     this.getPokemon()
@@ -71,7 +85,7 @@ export default defineComponent({
         </div>
         <div class="flip-card-back">
           <div>
-          stats
+            <button type="button" class="btn btn-primary" @click="removeTeam(pokemon.id)">Delete from team</button>
           </div>
         </div>
       </div>
