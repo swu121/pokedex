@@ -11,14 +11,20 @@ export default defineComponent({
   name: 'myTeam',
   data(){
     const pokearray = ref<Pokemon[]>([])
+    const boolvals : boolean[] = []
     console.log(pokearray)
-    return {pokearray}
+    return {pokearray, boolvals}
 
   },
   components: {
     Navbar
   },
   methods: {
+    fillboolval(){
+      for (let x:number =0; x < this.pokearray.length; x++){
+        this.boolvals.push(true);
+      }
+    },
     async getPokemon(){
       onAuthStateChanged(auth, async (user) => {
         if (user){
@@ -39,6 +45,7 @@ export default defineComponent({
             let data = await res.json();
             for (let x :number =0; x<data.length; x++){
                this.pokearray.push(data[x])
+               this.boolvals.push(true)
             }
           }
           catch(error){
@@ -50,13 +57,14 @@ export default defineComponent({
         }
       })
     },
-    async removeTeam(pokeid: number){
+    async removeTeam(pokeid: number, pokeindex: number){
       onAuthStateChanged(auth, async (user) => {
         if (user){
           let email:string = user.email!
           await updateDoc(doc(db, "team", email), {
             poketeam: arrayRemove(pokeid)
           });
+          this.boolvals[pokeindex] = false;
         }
         else{
           router.push('/login')
@@ -72,20 +80,20 @@ export default defineComponent({
 
 <template>
   <Navbar></Navbar>
-  <div class = "pokedex">
-    <div v-for="pokemon in pokearray" class = "flip-card">
+  <div class = "bg">
+    <div v-for="(pokemon, index) in pokearray" class = "flip-card" v-show = boolvals[index] :key="pokemon.id">
       <div class="flip-card-inner">
         <div class="flip-card-front">
           <div style="text-align: right;">#{{pokemon.id}}</div>
           <img class="card-img-top" v-bind:src = "pokemon.sprite">
-          <div class = "card-body">
+          <div class = "card-body" style = "padding: 0">
             <h5 class="card-title">{{pokemon.name}}</h5>
             <p class="card-text">Type(s): {{pokemon.types[0]}} {{pokemon.types[1]}}<br>Height: {{pokemon.height/10}} m <br>Weight: {{pokemon.weight/10}} kgs</p>
           </div>
         </div>
         <div class="flip-card-back">
           <div>
-            <button type="button" class="btn btn-primary" @click="removeTeam(pokemon.id)">Delete from team</button>
+            <button type="button" class="btn btn-primary" @click="removeTeam(pokemon.id, index)">Release</button>
           </div>
         </div>
       </div>
@@ -94,15 +102,6 @@ export default defineComponent({
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: white;
-  background-color: black;
-}
-
 .flip-card{
   border-style: hidden;
   background-color: transparent;
@@ -146,11 +145,12 @@ export default defineComponent({
   place-items: center;
 }
 
-.pokedex{
+.bg{
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   justify-items: center;
   gap: 5px;
+  height: 100vh;
 }
 
 .flip-card{

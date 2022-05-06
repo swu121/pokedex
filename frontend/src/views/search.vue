@@ -2,78 +2,62 @@
 import { defineComponent, ref } from 'vue';
 import Pokemon from '../types/pokemon'
 import Navbar from '../components/navbar.vue'
-import { doc, updateDoc, arrayUnion} from "firebase/firestore"
-import { db, auth } from "../firebase/index"
-import { onAuthStateChanged } from '@firebase/auth';
-import router from '../router';
-import Pokecard from '../components/card.vue'
-
 
 export default defineComponent({
-  name: 'Pokedex',
+  name: 'search',
+  props: {
+    id: String
+  },
   data(){
-    let x : number = 0;
+    const searchval = this.$route.params.id
     const pokearray = ref<Pokemon[]>([])
-
-    return {pokearray}
-
+    console.log(pokearray)
+    return {pokearray, searchval}
   },
   components: {
-    Navbar,
-    Pokecard
-},
+    Navbar
+  },
   methods: {
-    async getPokemon(){ 
+    async getPokemon(){
+      const settings = {
+        method: 'POST',  
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: this.$route.params.id
+        })
+      };
       try{
-        let res = await fetch(`http://localhost:3002/api`)
+        let res = await fetch(`http://localhost:3002/searchPokemon`, settings);
         let data = await res.json();
         for (let x :number =0; x<data.length; x++){
           this.pokearray.push(data[x])
         }
       }
       catch(error){
-        console.log(error)
+          console.log(error)
       }
-    },
-    getNextPokemon(){
-      window.onscroll = () => {
-        let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-        if (bottomOfWindow){
-          this.getPokemon()
-        }
-      }
-    },
-    async addTeam(pokeid: number){
-      onAuthStateChanged(auth, async (user) => {
-        if (user){
-          let email:string = user.email!
-          await updateDoc(doc(db, "team", email), {
-            poketeam: arrayUnion(pokeid)
-          });
-        }
-        else{
-          router.push('/login')
-        }
-      })
     }
   },
-  beforeMount(){
+    beforeMount(){
     this.getPokemon()
+    const searchval = this.$route.params.id
   },
-  mounted(){
-    this.getNextPokemon();
-  }
 })
 </script>
 
 <template>
   <Navbar></Navbar>
-  <div class = "pokedex">
-    <div v-for="pokemon in pokearray" class = "flip-card" :key="pokemon.id">
-      <div class="flip-card-inner">
+  <h1 v-if = "pokearray.length > 0" v-bind:style="{'margin-top': '50px'}">{{searchval}} Evolution Line</h1>
+  <h1 v-else v-bind:style="{'margin-top': '50px'}">No search results found for {{searchval}}</h1>
+  <div class = "background" v-bind:style="[pokearray.length > 1 ? pokearray.length > 2 ? {'grid-template-columns': 'repeat(3, 1fr)'} : {'grid-template-columns': 'repeat(2, 1fr)'} : {'grid-template-columns': 'repeat(1, 1fr)'}]" >
+    <div class = "flip-card" v-for="pokemon in pokearray">
+      <div class="flip-card-inner"> 
         <div class="flip-card-front">
           <div style="text-align: right;">#{{pokemon.id}}</div>
-          <img class="card-img-top" v-bind:src = "pokemon.sprite">
+          <img class="card-img-top" v-bind:src = 'pokemon.sprite'>
           <div class = "card-body" style = "padding: 0">
             <h5 class="card-title">{{pokemon.name}}</h5>
             <p class="card-text">Type(s): {{pokemon.types[0]}} {{pokemon.types[1]}}<br>Height: {{pokemon.height/10}} m <br>Weight: {{pokemon.weight/10}} kgs</p>
@@ -108,7 +92,7 @@ export default defineComponent({
               <div class="progress-bar" role="progressbar" v-bind:style = "{width:pokemon.stats2[5] + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{pokemon.stats[5]}}</div>
             </div>
           </div>
-          <button type="button" class="btn btn-primary" @click="addTeam(pokemon.id)">Catch</button>
+
         </div>
       </div>
     </div>
@@ -116,15 +100,13 @@ export default defineComponent({
 </template>
 
 <style>
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: white;
-  background-color: black;
-  height: 100%;
+.background{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  gap: 5px;
+  height: 100vh;
+  align-items: center;
 }
 
 .flip-card{
@@ -145,23 +127,13 @@ export default defineComponent({
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.flip-card:hover .flip-card-inner{
+.flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
 }
 
-.flip-card:hover .progress-bar{
-  animation-name: progress;
-  animation-duration: 1.5s;
-}
-@keyframes progress{
-  from{
-    width: 0;
-  }
-}
-
-
 .flip-card-front,
 .flip-card-back {
+  position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
@@ -170,54 +142,17 @@ export default defineComponent({
 .flip-card-front {
   background-color: #222e36ef;
   color: white;
-  position: absolute;
 }
 
 .flip-card-back {
   background-color: #222e36ef;
   color: white;
   transform: rotateY(180deg);
-}
-
-.stats{
-  width: 90%;
-  display: grid;
-  row-gap: 10px;
-  grid-template-columns: 25% 75%;
-}
-
-.pokedex{
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  justify-items: center;
-  gap: 5px;
+  display:grid;
+  place-items: center;
 }
 
 .flip-card{
   margin-bottom: 20px;
 }
-
-.btn {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.btn-primary {
-  font-family: Raleway-SemiBold;
-  font-size: 13px;
-  color: rgba(58, 133, 191, 0.75);
-  letter-spacing: 1px;
-  line-height: 15px;
-  border: 2px solid rgba(58, 133, 191, 0.75);
-  border-radius: 40px;
-  background: transparent;
-  transition: all 0.3s ease 0s;
-}
-
-.btn-primary:hover {
-  color: #FFF;
-  background: rgba(58, 133, 191, 0.75);
-  border: 2px solid rgba(58, 133, 191, 0.75);
-}
-
 </style>

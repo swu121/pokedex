@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Pokedex from '../views/Pokedex.vue'
 import Login from '../views/Login.vue'
 import myTeam from "../views/Team.vue"
+import search from "../views/search.vue"
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -24,6 +25,11 @@ const routes: Array<RouteRecordRaw> = [
         path: '/myteam',
         name: 'Team',
         component: myTeam
+    },
+    {
+        path: '/search:id',
+        name: 'Search', 
+        component: search
     }
 ]
 

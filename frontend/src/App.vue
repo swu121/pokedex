@@ -7,7 +7,6 @@
 <script lang="ts">
 import { onBeforeMount } from "vue";
 import { useRoute, useRouter } from "vue-router"
-import {initializeApp} from "firebase/app";
 import {auth} from "./firebase"
 
 
@@ -22,9 +21,18 @@ export function appRun(){
           router.replace('/')
         }
       }
-    })
+    }) 
   })
 }
  
 
 </script>
+
+<style>
+.app {
+  height: 100%;
+  width: 100%;
+  background-color: black;
+}
+
+</style>

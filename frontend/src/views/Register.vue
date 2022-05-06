@@ -73,8 +73,7 @@ export default defineComponent ({
         Register() {
             console.log(this.email, this.password)
             createUserWithEmailAndPassword(this.author, this.email, this.password)
-            .then((userCredential) => {
-                const user = userCredential.user;
+            .then(() => {
                 this.addUser()
                 router.push('/')
             })

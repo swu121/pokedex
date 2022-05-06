@@ -50,7 +50,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { signInWithEmailAndPassword } from "firebase/auth"
+import { signInWithEmailAndPassword, setPersistence, browserSessionPersistence } from "firebase/auth"
 import {auth} from "../firebase"
 import router from '../router/index'
 
@@ -70,18 +70,20 @@ export default defineComponent ({
 
     methods:{
         Login(){
-            signInWithEmailAndPassword(this.author, this.email, this.password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                console.log(user)
+            setPersistence(auth, browserSessionPersistence).then(() => {
+                signInWithEmailAndPassword(this.author, this.email, this.password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    console.log(user)
+                })
+                .catch((error) => {
+                    const errorMessage = error.message;
+                    alert(errorMessage)
+                });
+                console.log("logged in")
+                router.push('/');
             })
-            .catch((error) => {
-                const errorMessage = error.message;
-                alert(errorMessage)
-            });
-            console.log("logged in")
-            router.push('/');
-        },
+        }
     }
 })
 </script>

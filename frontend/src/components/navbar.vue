@@ -10,9 +10,11 @@ export default defineComponent({
     data(){
         let user : any = null
         let userStatus = ref(false);
+        let pokename = ref('')
         return {
             userStatus,
-            user
+            user,
+            pokename
         }
     },
 
@@ -22,6 +24,10 @@ export default defineComponent({
             .then(() => console.log("Signed Out"))
             .catch(err => alert(err.message))
             router.push('/')
+        },
+        shareData(){
+            console.log(this.pokename)
+            router.push('/search' + this.pokename)
         }
     },
     
@@ -30,7 +36,7 @@ export default defineComponent({
             if (user){
                 this.userStatus = true
             }
-            else{
+            else{ 
                 this.userStatus = false
             }
         })
@@ -43,7 +49,7 @@ export default defineComponent({
 <template>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Pokedex</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -63,7 +69,10 @@ export default defineComponent({
              <router-link to="/myteam" class = "nav-link">My Team</router-link>
         </li>
         </ul>
-
+    <form class="form-inline my-2 my-lg-0">
+      <input v-on:keyup.enter="shareData" class="form-control mr-sm-2" type="search" placeholder="Pokemon Name" aria-label="Search" v-model = "pokename">
+      <button class="btn btn-outline-success my-2 my-sm-0" @click = "shareData">Search</button>
+    </form>
     </div>
     </nav>
 </template>

@@ -4,12 +4,17 @@ import { defineComponent, ref } from 'vue';
 import Pokemon from "../types/pokemon"
 export default {
     name: 'Pokecard',
-    props: ref<Pokemon>(),
+    props: {
+      propExample:{
+        type: Object as PropType<Pokemon>
+      }
+    },
     data(){
-        let pokemon = this.props
-        return pokemon
+      const pokemon = this.props.propExample
+      return pokemon 
     }
 }
+
 </script>
 
 <template>
