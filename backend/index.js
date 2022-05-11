@@ -3,23 +3,12 @@ import cors from "cors"
 import fetch from "node-fetch"
 import dotenv from "dotenv"
 
-import {initializeApp} from "firebase/app";
-import {getFirestore, doc, getDoc} from "firebase/firestore"
+import {doc, getDoc} from "firebase/firestore"
+import { db } from "./firestore/firebase.js"
 
 const PORT = process.env.PORT || 3002;
-const firebaseConfig = {
-    apiKey: "AIzaSyBV5v7TZokHjIzlJjSNreNbaqlsAGl1Dns",
-    authDomain: "pokedex-a5642.firebaseapp.com",
-    projectId: "pokedex-a5642",
-    storageBucket: "pokedex-a5642.appspot.com",
-    messagingSenderId: "21220076380",
-    appId: "1:21220076380:web:03410ab538f0867dfe6f99",
-    measurementId: "G-XVRXYBYD7V"
-  };
 dotenv.config()
 const app = express();
-const fbapp = initializeApp(firebaseConfig)
-const db = getFirestore(fbapp)
 
 
 app.use(cors());
