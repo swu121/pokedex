@@ -6,33 +6,34 @@ import { doc, updateDoc, arrayUnion} from "firebase/firestore"
 import { db, auth } from "../firebase/index"
 import { onAuthStateChanged } from '@firebase/auth';
 import router from '../router';
-import Pokecard from '../components/card.vue'
+import Pokecard from '../components/pokecard.vue'
 
 
 export default defineComponent({
   name: 'Pokedex',
   data(){
-    let x : number = 0;
+    let x : number = 1;
     const pokearray = ref<Pokemon[]>([])
 
-    return {pokearray}
+    return {x, pokearray}
 
   },
   components: {
     Navbar,
-    Pokecard
+    Pokecard,
 },
   methods: {
     async getPokemon(){ 
       try{
-        let res = await fetch(`http://localhost:3002/api`)
+        let res = await fetch(`http://localhost:3002/api/` + this.x)
         let data = await res.json();
-        for (let x :number =0; x<data.length; x++){
-          this.pokearray.push(data[x])
+        for (let y :number =0; y<data.length; y++){
+          this.pokearray.push(data[y])
         }
+        this.x += 24
       }
       catch(error){
-        console.log(error)
+        console.log(error) 
       }
     },
     getNextPokemon(){
@@ -70,47 +71,7 @@ export default defineComponent({
   <Navbar></Navbar>
   <div class = "pokedex">
     <div v-for="pokemon in pokearray" class = "flip-card" :key="pokemon.id">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <div style="text-align: right;">#{{pokemon.id}}</div>
-          <img class="card-img-top" v-bind:src = "pokemon.sprite">
-          <div class = "card-body" style = "padding: 0">
-            <h5 class="card-title">{{pokemon.name}}</h5>
-            <p class="card-text">Type(s): {{pokemon.types[0]}} {{pokemon.types[1]}}<br>Height: {{pokemon.height/10}} m <br>Weight: {{pokemon.weight/10}} kgs</p>
-          </div>
-        </div>
-        <div class="flip-card-back">
-          <img class="front_img" v-bind:src = "pokemon.sprite2">
-          <h6>{{pokemon.name}}</h6>
-          <div class = "stats">
-            <h6 class = "HP-tag">HP</h6>
-            <div class="progress HPtag">
-              <div class="progress-bar HPtag" role="progressbar" v-bind:style = "{width:pokemon.stats2[0] + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{pokemon.stats[0]}}</div>
-            </div>
-            <h6>ATK</h6>
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" v-bind:style = "{width:pokemon.stats2[1] + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{pokemon.stats[1]}}</div>
-            </div>
-            <h6>DEF</h6>
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" v-bind:style = "{width:pokemon.stats2[2] + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{pokemon.stats[2]}}</div>
-            </div>
-            <h6>SPATK</h6>
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" v-bind:style = "{width:pokemon.stats2[3] + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{pokemon.stats[3]}}</div>
-            </div>
-            <h6>SPDEF</h6>
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" v-bind:style = "{width:pokemon.stats2[4] + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{pokemon.stats[4]}}</div>
-            </div>
-            <h6>SPD</h6>
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" v-bind:style = "{width:pokemon.stats2[5] + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{pokemon.stats[5]}}</div>
-            </div>
-          </div>
-          <button type="button" class="btn btn-primary" @click="addTeam(pokemon.id)">Catch</button>
-        </div>
-      </div>
+      <Pokecard v-bind="pokemon"></Pokecard>
     </div>
   </div>
 </template>
@@ -127,74 +88,11 @@ export default defineComponent({
   height: 100%;
 }
 
-.flip-card{
-  border-style: hidden;
-  background-color: transparent;
-  width: 250px;
-  height: 400px;
-  perspective: 1000px;
-}
-
-.flip-card-inner{
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
-
-.flip-card:hover .flip-card-inner{
-  transform: rotateY(180deg);
-}
-
-.flip-card:hover .progress-bar{
-  animation-name: progress;
-  animation-duration: 1.5s;
-}
-@keyframes progress{
-  from{
-    width: 0;
-  }
-}
-
-
-.flip-card-front,
-.flip-card-back {
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-}
-
-.flip-card-front {
-  background-color: #222e36ef;
-  color: white;
-  position: absolute;
-}
-
-.flip-card-back {
-  background-color: #222e36ef;
-  color: white;
-  transform: rotateY(180deg);
-}
-
-.stats{
-  width: 90%;
-  display: grid;
-  row-gap: 10px;
-  grid-template-columns: 25% 75%;
-}
-
 .pokedex{
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   justify-items: center;
   gap: 5px;
-}
-
-.flip-card{
-  margin-bottom: 20px;
 }
 
 .btn {

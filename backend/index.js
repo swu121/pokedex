@@ -40,7 +40,6 @@ app.post("/teamapi", async( req, res) => {
     if (docSnap.exists()){
         let teamarray = docSnap.get('poketeam')
         for (var i = 0; i < teamarray.length; i++){
-            console.log(teamarray[i])
             await searchPokemon(teamarray[i], KantoList)
         }
     }
@@ -51,9 +50,11 @@ app.post("/teamapi", async( req, res) => {
     res.json(KantoList)
 })
 
-let x  = 1;
-app.use("/api", async (req, res) => {
+
+app.get("/api/:value", async (req, res) => {
     let KantoList = []
+    let x = req.params.value
+    x = parseInt(x)
     let limit = x + 24;
     for (; x < limit; x++){
         console.log(x)

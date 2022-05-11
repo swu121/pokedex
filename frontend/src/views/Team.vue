@@ -28,6 +28,7 @@ export default defineComponent({
     async getPokemon(){
       onAuthStateChanged(auth, async (user) => {
         if (user){
+          console.log(user.getIdToken)
           let email:string = user.email!
           const settings = {
             method: 'POST',
@@ -37,7 +38,6 @@ export default defineComponent({
             },
             body: JSON.stringify({
               userid: email,
-              tester: 'test'
             })
           }; 
           try{

@@ -11,7 +11,6 @@ export default defineComponent({
   data(){
     const searchval = this.$route.params.id
     const pokearray = ref<Pokemon[]>([])
-    console.log(pokearray)
     return {pokearray, searchval}
   },
   components: {
