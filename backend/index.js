@@ -129,30 +129,3 @@ const searchPokemon = async (pokemonname, Kantolist) => {
     catch(error){
         console.log(error)}
     }
-    
-const getPokemon = async (x, KantoList) => {
-    const url = `https://pokeapi.co/api/v2/pokemon/${x}`
-    const res = await fetch(url);
-    const jsonres = await res.json();
-    let KantoDict= {}
-    KantoDict["id"] = x
-    const pokename = jsonres.name.charAt(0).toUpperCase() + jsonres.name.slice(1)
-    KantoDict["name"] = pokename
-    KantoDict["sprite"] = jsonres['sprites']['other']["official-artwork"]['front_default']
-    KantoDict["sprite2"] = jsonres['sprites']['front_default']
-    if (jsonres.types.length > 1) {
-        KantoDict["types"] = [jsonres.types[0].type.name, jsonres.types[1].type.name]
-    }
-    else{
-        KantoDict["types"] = [jsonres.types[0].type.name]
-    }
-    KantoDict["height"] = jsonres.height
-    KantoDict["weight"] = jsonres.weight
-    KantoDict["stats"] = [jsonres.stats[0].base_stat, jsonres.stats[1].base_stat,
-        jsonres.stats[2].base_stat, jsonres.stats[3].base_stat,
-        jsonres.stats[4].base_stat, jsonres.stats[5].base_stat]
-    KantoDict["stats2"] = [(jsonres.stats[0].base_stat/120)*100,(jsonres.stats[1].base_stat/120)*100,
-        (jsonres.stats[2].base_stat/120)*100,(jsonres.stats[3].base_stat/120)*100,(jsonres.stats[4].base_stat/120)*100,
-        (jsonres.stats[5].base_stat/120)*100,]
-    KantoList.push(KantoDict)
-}
