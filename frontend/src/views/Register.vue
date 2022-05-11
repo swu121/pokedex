@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import router from '../router/index'
 import { defineComponent, ref } from 'vue';
 import {auth, db} from "../firebase"
