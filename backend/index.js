@@ -2,14 +2,16 @@ import express from "express"
 import cors from "cors"
 import fetch from "node-fetch"
 import dotenv from "dotenv"
-
+import {initializeApp} from "firebase/app";
+import {getAuth} from "firebase/auth"
+import {getFirestore} from "firebase/firestore"
 import {doc, getDoc} from "firebase/firestore"
-import { db } from "./firestore/firebase.js"
 
-const PORT = process.env.PORT || 3002;
+
+
 dotenv.config()
+const PORT = process.env.PORT || 8080;
 const app = express();
-
 
 app.use(cors());
 app.use(express.json());
@@ -18,7 +20,22 @@ app.listen(PORT, () => {
             const url = `http://localhost:${PORT}/`
             console.log(`Server is running on ${url}`)
         })
-
+console.log(process.env.POKEapiKey)
+const firebaseConfig = {
+    apiKey: process.env.POKEapiKey,
+    authDomain: process.env.POKEauthDomain,
+    projectId: process.env.POKEprojectId,
+    storageBucket: process.env.POKEstorageBucket,
+    messagingSenderId: process.env.messagingSenderId,
+    appId: process.env.POKEappId,
+    measurementId: process.env.POKEmeasurentId,
+};
+            
+const fireApp = initializeApp(firebaseConfig)
+            
+const auth = getAuth(fireApp)
+            
+const db = getFirestore(fireApp)
 
 app.post("/teamapi", async( req, res) => {
     let KantoList = []

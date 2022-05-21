@@ -11,6 +11,6 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/firebase/index.js"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/firebase/index.ts", "src/firebase/firebase.config.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
