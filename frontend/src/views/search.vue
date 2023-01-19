@@ -29,7 +29,7 @@ export default defineComponent({
         })
       };
       try{
-        let res = await fetch(`http://localhost:3002/searchPokemon`, settings);
+        let res = await fetch(`https://swupokebackend.com/searchPokemon`, settings);
         let data = await res.json();
         for (let x :number =0; x<data.length; x++){
           this.pokearray.push(data[x])
@@ -42,7 +42,6 @@ export default defineComponent({
   },
     beforeMount(){
     this.getPokemon()
-    const searchval = this.$route.params.id
   },
 })
 </script>

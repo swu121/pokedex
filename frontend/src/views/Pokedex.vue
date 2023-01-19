@@ -7,15 +7,14 @@ import { db, auth } from "../firebase/index"
 import { onAuthStateChanged } from '@firebase/auth';
 import router from '../router';
 import Pokecard from '../components/pokecard.vue'
-
+import first25 from './frontpage.json'
 
 export default defineComponent({
   name: 'Pokedex',
   data(){
-    let x : number = 1;
+    let x : number = 25;
     const pokearray = ref<Pokemon[]>([])
-
-    return {x, pokearray}
+    return {x, pokearray, first25}
 
   },
   components: {
@@ -25,7 +24,7 @@ export default defineComponent({
   methods: {
     async getPokemon(){ 
       try{
-        let res = await fetch(`http://localhost:3002/api/` + this.x)
+        let res = await fetch(`https://swupokebackend.com/api/` + this.x)
         let data = await res.json();
         for (let y :number =0; y<data.length; y++){
           this.pokearray.push(data[y])
@@ -56,10 +55,16 @@ export default defineComponent({
           router.push('/login')
         }
       })
+    }, 
+    fillfirst(){
+      for (let y: number = 0; y<24; y++){
+        this.pokearray.push(first25[y])
+      } 
+
     }
   },
   beforeMount(){
-    this.getPokemon()
+    this.fillfirst()
   },
   mounted(){
     this.getNextPokemon();
@@ -90,7 +95,7 @@ export default defineComponent({
 
 .pokedex{
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   justify-items: center;
   gap: 5px;
 }

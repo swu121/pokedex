@@ -5,27 +5,28 @@
 </template>
 
 <script lang="ts">
-import { onBeforeMount } from "vue";
+import { defineComponent, onBeforeMount } from "vue";
 import { useRoute, useRouter } from "vue-router"
 import {auth} from "./firebase"
 
 
-export function appRun(){
-  const router = useRouter();
-  const route = useRoute();
-  
-  onBeforeMount(() => {
+export default defineComponent({
+  name: "App",
+  data(){
+    const router = useRouter();
+    const route = useRoute();
+    return {router, route}
+  },
+  beforeMount(){
     auth.onAuthStateChanged((user: any) => {
-      if (user){
-        if(route.path == '/register'){
-          router.replace('/')
-        }
+    if (user){
+      if(this.route.path == '/register'){
+        this.router.replace('/')
       }
-    }) 
-  })
-}
- 
-
+    }
+  }) 
+  }
+})
 </script>
 
 <style>

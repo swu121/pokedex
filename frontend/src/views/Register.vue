@@ -53,7 +53,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import router from '../router/index'
 import { defineComponent, ref } from 'vue';
 import {auth, db} from "../firebase"
-import {collection, addDoc} from "firebase/firestore"
+import {doc, setDoc} from "firebase/firestore"
 
 
 export default defineComponent ({
@@ -84,11 +84,11 @@ export default defineComponent ({
         },
         async addUser() {
             try{
-                const docRef = await addDoc(collection(db, "team"), {
+                const docRef = await setDoc(doc(db, "team", this.email), {
                     username: this.email,
                     poketeam: []
                 });
-                console.log("Document written with ID: ", docRef.id);
+                console.log("Document written with ID: ", docRef);
                 }
                 catch(e){
                     console.error("Error adding document: ", e);

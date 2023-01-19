@@ -12,7 +12,6 @@ export default defineComponent({
   data(){
     const pokearray = ref<Pokemon[]>([])
     const boolvals : boolean[] = []
-    console.log(pokearray)
     return {pokearray, boolvals}
 
   },
@@ -41,7 +40,7 @@ export default defineComponent({
             })
           }; 
           try{
-            let res = await fetch(`http://localhost:3002/teamapi`, settings);
+            let res = await fetch(`https://swupokebackend.com/teamapi/`, settings);
             let data = await res.json();
             for (let x :number =0; x<data.length; x++){
                this.pokearray.push(data[x])
@@ -146,11 +145,12 @@ export default defineComponent({
 }
 
 .bg{
+  background-color: black;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   justify-items: center;
   gap: 5px;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .flip-card{

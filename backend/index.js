@@ -13,14 +13,16 @@ dotenv.config()
 const PORT = process.env.PORT || 8080;
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: '*'
+}));
 app.use(express.json());
 
 app.listen(PORT, () => {
             const url = `http://localhost:${PORT}/`
             console.log(`Server is running on ${url}`)
         })
-console.log(process.env.POKEapiKey)
+        
 const firebaseConfig = {
     apiKey: process.env.POKEapiKey,
     authDomain: process.env.POKEauthDomain,
@@ -56,6 +58,9 @@ app.post("/teamapi", async( req, res) => {
     res.json(KantoList)
 })
 
+app.get("/", async (req, res) => {
+    res.send('PokeAPI is live on ' + PORT)
+})
 
 app.get("/api/:value", async (req, res) => {
     let KantoList = []
@@ -63,7 +68,6 @@ app.get("/api/:value", async (req, res) => {
     x = parseInt(x)
     let limit = x + 24;
     for (; x < limit; x++){
-        console.log(x)
         await searchPokemon(x, KantoList)
     }
     res.json(KantoList)})

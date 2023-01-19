@@ -130,4 +130,10 @@ async function addTeam(pokeid: number){
   row-gap: 10px;
   grid-template-columns: 25% 75%;
 }
+
+@keyframes progress{
+  from{
+    width: 0;
+  }
+}
 </style>

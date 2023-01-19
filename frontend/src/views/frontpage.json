@@ -1,0 +1,663 @@
+[
+    {
+    "id": 1,
+    "name": "Bulbasaur",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+    "types": [
+            "grass",
+            "poison"
+        ],
+    "height": 7,
+    "weight": 69,
+    "stats": [
+            45,
+            49,
+            49,
+            65,
+            65,
+            45
+        ],
+    "stats2": [
+            37.5,
+            40.833333333333336,
+            40.833333333333336,
+            54.166666666666664,
+            54.166666666666664,
+            37.5
+        ]
+    },
+    {
+    "id": 2,
+    "name": "Ivysaur",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
+    "types": [
+            "grass",
+            "poison"
+        ],
+    "height": 10,
+    "weight": 130,
+    "stats": [
+            60,
+            62,
+            63,
+            80,
+            80,
+            60
+        ],
+    "stats2": [
+            50,
+            51.66666666666667,
+            52.5,
+            66.66666666666666,
+            66.66666666666666,
+            50
+        ]
+    },
+    {
+    "id": 3,
+    "name": "Venusaur",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
+    "types": [
+            "grass",
+            "poison"
+        ],
+    "height": 20,
+    "weight": 1000,
+    "stats": [
+            80,
+            82,
+            83,
+            100,
+            100,
+            80
+        ],
+    "stats2": [
+            66.66666666666666,
+            68.33333333333333,
+            69.16666666666667,
+            83.33333333333334,
+            83.33333333333334,
+            66.66666666666666
+        ]
+    },
+    {
+    "id": 4,
+    "name": "Charmander",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
+    "types": [
+            "fire"
+        ],
+    "height": 6,
+    "weight": 85,
+    "stats": [
+            39,
+            52,
+            43,
+            60,
+            50,
+            65
+        ],
+    "stats2": [
+            32.5,
+            43.333333333333336,
+            35.833333333333336,
+            50,
+            41.66666666666667,
+            54.166666666666664
+        ]
+    },
+    {
+    "id": 5,
+    "name": "Charmeleon",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png",
+    "types": [
+            "fire"
+        ],
+    "height": 11,
+    "weight": 190,
+    "stats": [
+            58,
+            64,
+            58,
+            80,
+            65,
+            80
+        ],
+    "stats2": [
+            48.333333333333336,
+            53.333333333333336,
+            48.333333333333336,
+            66.66666666666666,
+            54.166666666666664,
+            66.66666666666666
+        ]
+    },
+    {
+    "id": 6,
+    "name": "Charizard",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
+    "types": [
+            "fire",
+            "flying"
+        ],
+    "height": 17,
+    "weight": 905,
+    "stats": [
+            78,
+            84,
+            78,
+            109,
+            85,
+            100
+        ],
+    "stats2": [
+            65,
+            70,
+            65,
+            90.83333333333333,
+            70.83333333333334,
+            83.33333333333334
+        ]
+    },
+    {
+    "id": 7,
+    "name": "Squirtle",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
+    "types": [
+            "water"
+        ],
+    "height": 5,
+    "weight": 90,
+    "stats": [
+            44,
+            48,
+            65,
+            50,
+            64,
+            43
+        ],
+    "stats2": [
+            36.666666666666664,
+            40,
+            54.166666666666664,
+            41.66666666666667,
+            53.333333333333336,
+            35.833333333333336
+        ]
+    },
+    {
+    "id": 8,
+    "name": "Wartortle",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/8.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png",
+    "types": [
+            "water"
+        ],
+    "height": 10,
+    "weight": 225,
+    "stats": [
+            59,
+            63,
+            80,
+            65,
+            80,
+            58
+        ],
+    "stats2": [
+            49.166666666666664,
+            52.5,
+            66.66666666666666,
+            54.166666666666664,
+            66.66666666666666,
+            48.333333333333336
+        ]
+    },
+    {
+    "id": 9,
+    "name": "Blastoise",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png",
+    "types": [
+            "water"
+        ],
+    "height": 16,
+    "weight": 855,
+    "stats": [
+            79,
+            83,
+            100,
+            85,
+            105,
+            78
+        ],
+    "stats2": [
+            65.83333333333333,
+            69.16666666666667,
+            83.33333333333334,
+            70.83333333333334,
+            87.5,
+            65
+        ]
+    },
+    {
+    "id": 10,
+    "name": "Caterpie",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png",
+    "types": [
+            "bug"
+        ],
+    "height": 3,
+    "weight": 29,
+    "stats": [
+            45,
+            30,
+            35,
+            20,
+            20,
+            45
+        ],
+    "stats2": [
+            37.5,
+            25,
+            29.166666666666668,
+            16.666666666666664,
+            16.666666666666664,
+            37.5
+        ]
+    },
+    {
+    "id": 11,
+    "name": "Metapod",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/11.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/11.png",
+    "types": [
+            "bug"
+        ],
+    "height": 7,
+    "weight": 99,
+    "stats": [
+            50,
+            20,
+            55,
+            25,
+            25,
+            30
+        ],
+    "stats2": [
+            41.66666666666667,
+            16.666666666666664,
+            45.83333333333333,
+            20.833333333333336,
+            20.833333333333336,
+            25
+        ]
+    },
+    {
+    "id": 12,
+    "name": "Butterfree",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png",
+    "types": [
+            "bug",
+            "flying"
+        ],
+    "height": 11,
+    "weight": 320,
+    "stats": [
+            60,
+            45,
+            50,
+            90,
+            80,
+            70
+        ],
+    "stats2": [
+            50,
+            37.5,
+            41.66666666666667,
+            75,
+            66.66666666666666,
+            58.333333333333336
+        ]
+    },
+    {
+    "id": 13,
+    "name": "Weedle",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/13.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png",
+    "types": [
+            "bug",
+            "poison"
+        ],
+    "height": 3,
+    "weight": 32,
+    "stats": [
+            40,
+            35,
+            30,
+            20,
+            20,
+            50
+        ],
+    "stats2": [
+            33.33333333333333,
+            29.166666666666668,
+            25,
+            16.666666666666664,
+            16.666666666666664,
+            41.66666666666667
+        ]
+    },
+    {
+    "id": 14,
+    "name": "Kakuna",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/14.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/14.png",
+    "types": [
+            "bug",
+            "poison"
+        ],
+    "height": 6,
+    "weight": 100,
+    "stats": [
+            45,
+            25,
+            50,
+            25,
+            25,
+            35
+        ],
+    "stats2": [
+            37.5,
+            20.833333333333336,
+            41.66666666666667,
+            20.833333333333336,
+            20.833333333333336,
+            29.166666666666668
+        ]
+    },
+    {
+    "id": 15,
+    "name": "Beedrill",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/15.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/15.png",
+    "types": [
+            "bug",
+            "poison"
+        ],
+    "height": 10,
+    "weight": 295,
+    "stats": [
+            65,
+            90,
+            40,
+            45,
+            80,
+            75
+        ],
+    "stats2": [
+            54.166666666666664,
+            75,
+            33.33333333333333,
+            37.5,
+            66.66666666666666,
+            62.5
+        ]
+    },
+    {
+    "id": 16,
+    "name": "Pidgey",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/16.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/16.png",
+    "types": [
+            "normal",
+            "flying"
+        ],
+    "height": 3,
+    "weight": 18,
+    "stats": [
+            40,
+            45,
+            40,
+            35,
+            35,
+            56
+        ],
+    "stats2": [
+            33.33333333333333,
+            37.5,
+            33.33333333333333,
+            29.166666666666668,
+            29.166666666666668,
+            46.666666666666664
+        ]
+    },
+    {
+    "id": 17,
+    "name": "Pidgeotto",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/17.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/17.png",
+    "types": [
+            "normal",
+            "flying"
+        ],
+    "height": 11,
+    "weight": 300,
+    "stats": [
+            63,
+            60,
+            55,
+            50,
+            50,
+            71
+        ],
+    "stats2": [
+            52.5,
+            50,
+            45.83333333333333,
+            41.66666666666667,
+            41.66666666666667,
+            59.166666666666664
+        ]
+    },
+    {
+    "id": 18,
+    "name": "Pidgeot",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/18.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/18.png",
+    "types": [
+            "normal",
+            "flying"
+        ],
+    "height": 15,
+    "weight": 395,
+    "stats": [
+            83,
+            80,
+            75,
+            70,
+            70,
+            101
+        ],
+    "stats2": [
+            69.16666666666667,
+            66.66666666666666,
+            62.5,
+            58.333333333333336,
+            58.333333333333336,
+            84.16666666666667
+        ]
+    },
+    {
+    "id": 19,
+    "name": "Rattata",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/19.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/19.png",
+    "types": [
+            "normal"
+        ],
+    "height": 3,
+    "weight": 35,
+    "stats": [
+            30,
+            56,
+            35,
+            25,
+            35,
+            72
+        ],
+    "stats2": [
+            25,
+            46.666666666666664,
+            29.166666666666668,
+            20.833333333333336,
+            29.166666666666668,
+            60
+        ]
+    },
+    {
+    "id": 20,
+    "name": "Raticate",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/20.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/20.png",
+    "types": [
+            "normal"
+        ],
+    "height": 7,
+    "weight": 185,
+    "stats": [
+            55,
+            81,
+            60,
+            50,
+            70,
+            97
+        ],
+    "stats2": [
+            45.83333333333333,
+            67.5,
+            50,
+            41.66666666666667,
+            58.333333333333336,
+            80.83333333333333
+        ]
+    },
+    {
+    "id": 21,
+    "name": "Spearow",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/21.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/21.png",
+    "types": [
+            "normal",
+            "flying"
+        ],
+    "height": 3,
+    "weight": 20,
+    "stats": [
+            40,
+            60,
+            30,
+            31,
+            31,
+            70
+        ],
+    "stats2": [
+            33.33333333333333,
+            50,
+            25,
+            25.833333333333336,
+            25.833333333333336,
+            58.333333333333336
+        ]
+    },
+    {
+    "id": 22,
+    "name": "Fearow",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/22.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/22.png",
+    "types": [
+            "normal",
+            "flying"
+        ],
+    "height": 12,
+    "weight": 380,
+    "stats": [
+            65,
+            90,
+            65,
+            61,
+            61,
+            100
+        ],
+    "stats2": [
+            54.166666666666664,
+            75,
+            54.166666666666664,
+            50.83333333333333,
+            50.83333333333333,
+            83.33333333333334
+        ]
+    },
+    {
+    "id": 23,
+    "name": "Ekans",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/23.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/23.png",
+    "types": [
+            "poison"
+        ],
+    "height": 20,
+    "weight": 69,
+    "stats": [
+            35,
+            60,
+            44,
+            40,
+            54,
+            55
+        ],
+    "stats2": [
+            29.166666666666668,
+            50,
+            36.666666666666664,
+            33.33333333333333,
+            45,
+            45.83333333333333
+        ]
+    },
+    {
+    "id": 24,
+    "name": "Arbok",
+    "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/24.png",
+    "sprite2": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/24.png",
+    "types": [
+            "poison"
+        ],
+    "height": 35,
+    "weight": 650,
+    "stats": [
+            60,
+            95,
+            69,
+            65,
+            79,
+            80
+        ],
+    "stats2": [
+            50,
+            79.16666666666666,
+            57.49999999999999,
+            54.166666666666664,
+            65.83333333333333,
+            66.66666666666666
+        ]
+    }
+]
